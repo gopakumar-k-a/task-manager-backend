@@ -8,11 +8,9 @@ export const socketConfig = (io) => {
       userId !== "undefined" &&
       userId !== null
     ) {
-      console.log(`user connected with user id ${userId} and socket id ${socket.id}`);
-      console.log(userId);
+
 
       userSocketMap[userId] = socket.id;
-      console.log(userSocketMap);
       
     }
 

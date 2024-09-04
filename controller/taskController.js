@@ -18,16 +18,15 @@ const taskController = () => {
       createdBy: userId,
     };
 
-    console.log("task is ", task);
 
     const newTask = await Task.create(task);
     const [formattedTask] = await Task.aggregate([
       {
-        $match: { _id: newTask._id }, // Match the newly created task by its ID
+        $match: { _id: newTask._id },
       },
       {
         $lookup: {
-          from: "users", // Assuming your user collection is named 'users'
+          from: "users", 
           localField: "createdBy",
           foreignField: "_id",
           as: "userData",
@@ -61,7 +60,6 @@ const taskController = () => {
   });
 
   const getTasks = asyncHandler(async (req, res) => {
-    // const { userId } = req.body;
 
     const tasks = await Task.aggregate([
       {
@@ -115,7 +113,6 @@ const taskController = () => {
         },
       },
     ]);
-    console.log("tasks ", tasks);
     res.status(200).json({
       message: "data retrived",
       tasks,
@@ -133,7 +130,6 @@ const taskController = () => {
     const updatedTask = await Task.findByIdAndUpdate(_id, newData, {
       new: true,
     });
-    // const newTask = await Task.create(task);
     const [formattedTask] = await Task.aggregate([
       {
         $match: { _id: updatedTask._id },
@@ -183,8 +179,6 @@ const taskController = () => {
         },
       },
     ]);
-    console.log("udpated task ", updatedTask);
-    console.log("formated task", formattedTask);
     io.emit("taskEdited", { updatedTask: formattedTask });
     res.status(200).json({
       message: "task edited successfully",
@@ -194,13 +188,11 @@ const taskController = () => {
 
   const deleteTask = asyncHandler(async (req, res) => {
     const { userId } = req.user;
-    // const { id } = req.body;
     const { taskId } = req.params;
     if (!taskId) {
       throw new ErrorResponse("id is required", 404);
     }
 
-    // Find and delete the task
     const deletedTask = await Task.findOneAndDelete({
       _id: taskId,
       createdBy: userId,
@@ -217,38 +209,7 @@ const taskController = () => {
       deletedTaskId: deletedTask._id,
     });
   });
-  //   const addTask = asyncHandler(async (req, res) =>{
-
-  //       const newTask = await Task.create(req.body); // Create a new task in the database
-  //       io.emit('taskAdded', newTask); // Emit an event to all connected clients
-  //       res.status(201).json(newTask);
-
-  //   });
-
-  //   // Endpoint to update a task
-  //   app.put('/tasks/:id', async (req, res) => {
-  //     try {
-  //       const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, {
-  //         new: true,
-  //       });
-  //       io.emit('taskUpdated', updatedTask); // Emit an event when a task is updated
-  //       res.status(200).json(updatedTask);
-  //     } catch (err) {
-  //       res.status(500).json({ error: 'Failed to update task' });
-  //     }
-  //   });
-
-  //   // Endpoint to delete a task
-  //   app.delete('/tasks/:id', async (req, res) => {
-  //     try {
-  //       await Task.findByIdAndDelete(req.params.id);
-  //       io.emit('taskDeleted', req.params.id); // Emit an event when a task is deleted
-  //       res.status(200).json({ message: 'Task deleted' });
-  //     } catch (err) {
-  //       res.status(500).json({ error: 'Failed to delete task' });
-  //     }
-  //   });
-
+  
   return { addTask, getTasks, editTask, deleteTask };
 };
 
