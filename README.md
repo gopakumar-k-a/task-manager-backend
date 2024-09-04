@@ -1,43 +1,51 @@
-# Node.js Backend for imageDrive
+# 📝 Node.js Backend for Task Manager
 
-This is the backend for the `imageDrive` application, built using Node.js. It handles image uploads, manages user authentication, and stores data in MongoDB. The backend integrates with Amazon S3 for file storage and Multer for handling file uploads.
+This repository contains the backend for the **Task Manager** application, built using **Node.js**. It handles task management, user authentication, and integrates with **MongoDB** for data storage. The backend also supports real-time updates via **WebSocket** communication for collaborative task management.
 
-## Features
+## ✨ Features
 
-- **Image Upload**: Handles image uploads and stores them in an Amazon S3 bucket.
-- **User Authentication**: Provides registration, login, and password reset functionalities.
-- **Data Storage**: Stores image metadata and user information in MongoDB.
-- **Image Management**: Allows users to manage their images, including editing and deleting.
+### 🚀 Task Management
+- **Create, update, and delete tasks**.
+- Manage tasks with attributes such as **status, priority, and due dates**.
 
-## Tech Stack
+### 🔐 User Authentication
+- **Registration, login, and password reset** functionalities for secure user access.
 
+### 🕒 Real-Time Collaboration
+- **Reflects task changes in real-time** for all online users using WebSocket communication.
+
+### 🗄️ Data Storage
+- Task details and user information are stored securely in **MongoDB**.
+
+## 🛠️ Tech Stack
 - **Node.js**: JavaScript runtime for building the server-side application.
-- **Express.js**: Web framework for Node.js to handle HTTP requests.
-- **Multer**: Middleware for handling file uploads.
-- **Amazon S3**: Scalable cloud storage for storing uploaded images.
-- **MongoDB**: NoSQL database for storing image metadata and user information.
+- **Express.js**: Web framework for handling HTTP requests.
+- **MongoDB**: NoSQL database for storing task and user data.
 - **JWT**: JSON Web Tokens for secure authentication.
+- **Socket.io**: Library for real-time, bidirectional communication.
 
-## Backend Architecture
+## 🏗️ Backend Architecture
+- **MVC**:  separates an application into three main components—Model, View, and Controller—allowing efficient organization, flexibility, and scalable development..
+### 📋 Task Management
+- **Task CRUD Operations**: Endpoints for creating, reading, updating, and deleting tasks.
+- **Data Storage**: Task details such as titles, descriptions, status, and priority are stored in **MongoDB**.
 
-### Image Upload Process
+### 🛡️ Authentication
+- **Registration**: Users can create an account using their email and phone number.
+- **Login**: Users can log in with their credentials, and **JWT tokens** are used for session management.
 
-1. **File Handling**: Uses [Multer](https://www.npmjs.com/package/multer) to handle file uploads.
-2. **Storage**: Uploaded images are stored in an [Amazon S3 bucket](https://aws.amazon.com/s3/) for scalable and secure storage.
-3. **Database**: Image metadata (such as titles and URLs) is stored in [MongoDB](https://www.mongodb.com/).
 
-### Authentication
+### 🔄 Real-Time Collaboration
+- **WebSocket Integration**: Uses **Socket.io** to handle real-time updates for task changes.
+- **Real-Time Updates**: Any changes made to tasks are instantly reflected for all online users.
 
-- **Registration**: Users can create an account using their email ID and phone number.
-- **Login**: Users can log in with their credentials, and JWT tokens are used for session management.
-- **Password Reset**: Provides functionality for users to reset their passwords if forgotten.
-
-## Getting Started
+## 🚀 Getting Started
 
 To set up the backend, follow these steps:
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/gopakumar-k-a/imageDrive-frontend.git
-   cd imageDrive-backend
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/gopakumar-k-a/task-manager-backend.git
+cd task-manager-backend
 
